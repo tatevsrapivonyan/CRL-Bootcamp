@@ -24,17 +24,11 @@ Welcome to the repository for Picsart Academy's Code Republic Lab Bootcamp progr
 ### 2.3 Spreadsheet
 - Build a basic spreadsheet application.
 
-### 2.4 Tic-Tac-Toe
-- Implement a classic Tic-Tac-Toe game.
-
-### 2.5 CPU Simulator
+### 2.4 CPU Simulator
 - Simulate CPU operations to understand low-level programming concepts.
 
-### 2.6 Interpreter
+### 2.5 Interpreter
 - Develop an interpreter for a simple programming language.
-
-### 2.7 Bash Clone
-- Create a basic clone of the Bash shell to learn about command-line interfaces.
 
 ## Getting Started
 
