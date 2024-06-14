@@ -1,7 +1,7 @@
 #include "vector.hpp"
 
 vector::vector()
-	: m_capacity{ 1 }
+	: m_capacity{ }
 	, m_size{ m_capacity }
 	, m_array{ nullptr }
 {
@@ -19,8 +19,13 @@ vector::vector(const vector& vec)
 	, m_size{ vec.get_size() }
 	, m_array{ new int[m_capacity] }
 {
-	for (size_t i = 0; i < m_size; ++i)
+	copy(vec);
+}
+
+void vector::copy(const vector& vec)
+{
+	for (size_t i = 0; i < this->m_size; ++i)
 	{
-		m_array[i] = vec.m_array[i];
+		this->m_array[i] = vec.m_array[i];
 	}
 }

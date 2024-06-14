@@ -34,6 +34,10 @@ public:
 	void reserve(size_t);
 
 private:
+	void copy(const vector&);
+	void move(vector&);
+
+private:
 	size_t m_capacity;
 	size_t m_size;
 	int* m_array;
