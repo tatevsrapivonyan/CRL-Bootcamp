@@ -34,7 +34,7 @@ public:
 	void reserve(size_t);
 
 private:
-	int* m_array;
 	size_t m_capacity;
 	size_t m_size;
+	int* m_array;
 };
