@@ -13,3 +13,14 @@ vector::vector(size_t size)
 	, m_array {new int[m_capacity]}
 {
 }
+
+vector::vector(const vector& vec)
+	: m_capacity{ vec.get_capacity() }
+	, m_size{ vec.get_size() }
+	, m_array{ new int[m_capacity] }
+{
+	for (size_t i = 0; i < m_size; ++i)
+	{
+		m_array[i] = vec.m_array[i];
+	}
+}
