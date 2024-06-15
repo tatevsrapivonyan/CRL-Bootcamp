@@ -14,6 +14,19 @@ vector::vector(size_t size)
 {
 }
 
+vector::vector(const std::initializer_list<int>& lst)
+	: m_capacity{ lst.size() }
+	, m_size{ lst.size() }
+	, m_array{ new int[m_capacity] }
+{
+	size_t i = 0;
+	for (auto l : lst)
+	{
+		m_array[i] = l;
+		++i;
+	}
+}
+
 vector::vector(const vector& vec)
 	: m_capacity{ vec.get_capacity() }
 	, m_size{ vec.get_size() }
@@ -35,6 +48,22 @@ vector& vector::operator=(const vector& vec)
 		copy(vec);
 	}
 	return *this;
+}
+
+vector::~vector()
+{
+	delete m_array;
+	m_array = nullptr;
+}
+
+const size_t vector::get_capacity() const
+{
+	return m_capacity;
+}
+
+const size_t vector::get_size() const
+{
+	return m_size;
 }
 
 void vector::copy(const vector& vec)

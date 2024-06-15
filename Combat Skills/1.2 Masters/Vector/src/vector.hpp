@@ -1,4 +1,5 @@
-#pragma once
+#ifndef VECTOR_HPP
+#define VECTOR_HPP
 
 #include <iostream>
 #include <initializer_list>
@@ -8,7 +9,7 @@ class vector
 public:
 	vector();
 	vector(size_t);
-	vector(const std::initializer_list&);
+	vector(const std::initializer_list<int>&);
 	vector(const vector&);
 	vector(vector&&);
 	vector& operator=(const vector&);
@@ -20,9 +21,9 @@ public:
 	const vector operator[](size_t) const;
 	vector& at(size_t);
 	const vector at(size_t) const;
-	size_t get_size() const;
+	const size_t get_size() const;
 	void set_size(size_t);
-	size_t get_capacity() const;
+	const size_t get_capacity() const;
 	void set_capacity(size_t);
 	bool is_empty() const;
 	void push_back(int);
@@ -42,3 +43,5 @@ private:
 	size_t m_size;
 	int* m_array;
 };
+
+#endif //VECTOR_HPP
