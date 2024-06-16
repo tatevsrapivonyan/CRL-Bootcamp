@@ -72,7 +72,19 @@ int& vector::operator[](size_t index)
 	return m_array[index];
 }
 
-const int vector::operator[](size_t index) const
+const int& vector::operator[](size_t index) const
+{
+	index_check(index);
+	return m_array[index];
+}
+
+int& vector::at(size_t index)
+{
+	index_check(index);
+	return m_array[index];
+}
+
+const int& vector::at(size_t index) const
 {
 	index_check(index);
 	return m_array[index];

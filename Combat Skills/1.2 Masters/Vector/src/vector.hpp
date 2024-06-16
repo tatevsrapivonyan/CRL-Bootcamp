@@ -18,9 +18,9 @@ public:
 
 public:
 	int& operator[](size_t);
-	const int operator[](size_t) const;
-	vector& at(size_t);
-	const vector at(size_t) const;
+	const int& operator[](size_t) const;
+	int& at(size_t);
+	const int& at(size_t) const;
 	const size_t get_size() const;
 	void set_size(size_t);
 	const size_t get_capacity() const;
