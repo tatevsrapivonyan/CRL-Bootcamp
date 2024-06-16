@@ -17,8 +17,8 @@ public:
 	~vector();
 
 public:
-	vector& operator[](size_t);
-	const vector operator[](size_t) const;
+	int& operator[](size_t);
+	const int operator[](size_t) const;
 	vector& at(size_t);
 	const vector at(size_t) const;
 	const size_t get_size() const;
@@ -37,6 +37,7 @@ public:
 private:
 	void copy(const vector&);
 	void move(vector&);
+	void index_check(size_t) const;
 
 private:
 	size_t m_capacity;

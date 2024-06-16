@@ -66,10 +66,30 @@ const size_t vector::get_size() const
 	return m_size;
 }
 
+int& vector::operator[](size_t index)
+{
+	index_check(index);
+	return m_array[index];
+}
+
+const int vector::operator[](size_t index) const
+{
+	index_check(index);
+	return m_array[index];
+}
+
 void vector::copy(const vector& vec)
 {
 	for (size_t i = 0; i < this->m_size; ++i)
 	{
 		this->m_array[i] = vec.m_array[i];
+	}
+}
+
+void vector::index_check(size_t index) const
+{
+	if (index >= m_size)
+	{
+		throw std::out_of_range("Index is out of range.");
 	}
 }
