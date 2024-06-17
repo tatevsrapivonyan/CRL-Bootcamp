@@ -90,6 +90,15 @@ const int& vector::at(size_t index) const
 	return m_array[index];
 }
 
+bool vector::is_empty() const
+{
+	if (m_size == 0)
+	{
+		return true;
+	}
+	return false;
+}
+
 void vector::copy(const vector& vec)
 {
 	for (size_t i = 0; i < this->m_size; ++i)
