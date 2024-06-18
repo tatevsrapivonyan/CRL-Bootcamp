@@ -22,9 +22,7 @@ public:
 	int& at(size_t);
 	const int& at(size_t) const;
 	const size_t get_size() const;
-	void set_size(size_t);
 	const size_t get_capacity() const;
-	void set_capacity(size_t);
 	bool is_empty() const;
 	void push_back(int);
 	void insert(int, int);
@@ -34,7 +32,7 @@ public:
 	void resize(size_t);
 	void reserve(size_t);
 
-private:
+private: 
 	void copy(const vector&);
 	void move(vector&);
 	void index_check(size_t) const;
