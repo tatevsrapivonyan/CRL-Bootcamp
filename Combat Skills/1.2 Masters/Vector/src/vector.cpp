@@ -56,12 +56,12 @@ vector::~vector()
 	m_array = nullptr;
 }
 
-const size_t vector::get_capacity() const
+const size_t vector::capacity() const
 {
 	return m_capacity;
 }
 
-const size_t vector::get_size() const
+const size_t vector::size() const
 {
 	return m_size;
 }

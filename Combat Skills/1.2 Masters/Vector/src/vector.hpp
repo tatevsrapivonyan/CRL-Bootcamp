@@ -21,8 +21,8 @@ public:
 	const int& operator[](size_t) const;
 	int& at(size_t);
 	const int& at(size_t) const;
-	const size_t get_size() const;
-	const size_t get_capacity() const;
+	const size_t size() const;
+	const size_t capacity() const;
 	bool is_empty() const;
 	void push_back(int);
 	void insert(int, int);
