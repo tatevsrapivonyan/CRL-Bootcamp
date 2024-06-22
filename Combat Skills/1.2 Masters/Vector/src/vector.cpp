@@ -99,6 +99,25 @@ bool vector::is_empty() const
 	return false;
 }
 
+void vector::push_back(int new_item)
+{
+	if (m_size == m_capacity)
+	{
+		m_capacity = m_size * 2;
+		int* new_array = new int[m_capacity];
+		
+		for (size_t i = 0; i < m_size; ++i)
+		{
+			new_array[i] = m_array[i];
+		}
+
+		delete[] m_array;
+		m_array = new_array;
+	}
+
+	m_array[size++] = new_item;
+}
+
 void vector::copy(const vector& vec)
 {
 	for (size_t i = 0; i < this->m_size; ++i)
