@@ -52,8 +52,7 @@ vector& vector::operator=(const vector& vec)
 
 vector::~vector()
 {
-	delete m_array;
-	m_array = nullptr;
+	clear();
 }
 
 const size_t vector::capacity() const
@@ -116,6 +115,19 @@ void vector::push_back(int new_item)
 	}
 
 	m_array[size++] = new_item;
+}
+
+void vector::pop_back()
+{
+	--m_size;
+}
+
+void vector::clear()
+{
+	delete[] m_array;
+	m_array = nullptr;
+	m_size = 0;
+	m_capacity = 0;
 }
 
 void vector::copy(const vector& vec)
