@@ -98,14 +98,15 @@ bool vector::is_empty() const
 	return false;
 }
 
-void vector::push_back(int new_item)
+void vector::resize(size_t new_size)
 {
-	if (m_size == m_capacity)
+	if (new_size == m_capacity)
 	{
-		m_capacity = m_size * 2;
+		m_size = new_size;
+		m_capacity = new_size * 2;
 		int* new_array = new int[m_capacity];
-		
-		for (size_t i = 0; i < m_size; ++i)
+
+		for (size_t i = 0; i < new_size; ++i)
 		{
 			new_array[i] = m_array[i];
 		}
@@ -113,7 +114,11 @@ void vector::push_back(int new_item)
 		delete[] m_array;
 		m_array = new_array;
 	}
+}
 
+void vector::push_back(int new_item)
+{
+	resize(m_size);
 	m_array[size++] = new_item;
 }
 
@@ -128,6 +133,30 @@ void vector::clear()
 	m_array = nullptr;
 	m_size = 0;
 	m_capacity = 0;
+}
+
+void vector::insert(int index, int item)
+{
+	if (index > size)
+	{
+		size_t new_size = m_size;
+
+		while (new_size < index)
+		{
+			push_back(0);
+		}
+		push_back(item);
+	}
+	else
+	{
+		size_t new_size = m_size + 1;
+		resize(new_size);
+		for (size_t i = m_size - 1; i > index; ++i)
+		{
+			m_array[i] = m_array[i - 1];
+		}
+		m_array[index] = item;
+	}
 }
 
 void vector::copy(const vector& vec)
