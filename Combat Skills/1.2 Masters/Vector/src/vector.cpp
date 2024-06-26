@@ -28,8 +28,8 @@ vector::vector(const std::initializer_list<int>& lst)
 }
 
 vector::vector(const vector& vec)
-	: m_capacity{ vec.get_capacity() }
-	, m_size{ vec.get_size() }
+	: m_capacity{ vec.capacity() }
+	, m_size{ vec.size() }
 	, m_array{ new int[m_capacity] }
 {
 	copy(vec);
@@ -41,8 +41,8 @@ vector& vector::operator=(const vector& vec)
 	{
 		delete m_array;
 
-		m_capacity = vec.get_capacity();
-		m_size = vec.get_size();
+		m_capacity = vec.capacity();
+		m_size = vec.size();
 		m_array = new int[m_capacity];
 
 		copy(vec);
@@ -119,7 +119,7 @@ void vector::resize(size_t new_size)
 void vector::push_back(int new_item)
 {
 	resize(m_size);
-	m_array[size++] = new_item;
+	m_array[m_size++] = new_item;
 }
 
 void vector::pop_back()
@@ -137,7 +137,7 @@ void vector::clear()
 
 void vector::insert(int index, int item)
 {
-	if (index > size)
+	if (index > m_size)
 	{
 		size_t new_size = m_size;
 
