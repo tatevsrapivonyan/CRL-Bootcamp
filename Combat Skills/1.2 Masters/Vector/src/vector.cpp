@@ -35,6 +35,11 @@ vector::vector(const vector& vec)
 	copy(vec);
 }
 
+vector::vector(vector&& vec) 
+{
+	move(vec);
+}
+
 vector& vector::operator=(const vector& vec)
 {
 	if (this != &vec)
