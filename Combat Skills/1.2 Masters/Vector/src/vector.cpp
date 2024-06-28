@@ -40,6 +40,15 @@ vector::vector(vector&& vec)
 	move(vec);
 }
 
+operator& vector::vector(vector&& vec)
+{
+	if (this != &vec)
+	{
+
+	}
+	return *this;
+}
+
 vector& vector::operator=(const vector& vec)
 {
 	if (this != &vec)
