@@ -34,7 +34,7 @@ public:
 
 private: 
 	void copy(const vector&);
-	void move(vector&);
+	void move(vector&&);
 	void index_check(size_t) const;
 
 private:

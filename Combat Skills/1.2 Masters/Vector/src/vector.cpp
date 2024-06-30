@@ -40,11 +40,11 @@ vector::vector(vector&& vec)
 	move(vec);
 }
 
-operator& vector::vector(vector&& vec)
+vector& vector::operator=(vector&& vec)
 {
 	if (this != &vec)
 	{
-
+		mov(vec);
 	}
 	return *this;
 }
@@ -179,6 +179,11 @@ void vector::copy(const vector& vec)
 	{
 		this->m_array[i] = vec.m_array[i];
 	}
+}
+
+void vector::move(vector&& vec)
+{
+
 }
 
 void vector::index_check(size_t index) const
