@@ -28,15 +28,16 @@ vector::vector(const std::initializer_list<int>& lst)
 	}
 }
 
-vector::vector(const vector& vec)
-	: m_capacity{ vec.capacity() }
-	, m_size{ vec.size() }
-	, m_array{ new int[m_capacity] };
+vector::vector(const vector& vec) 
+	: m_capacity{ vec.m_capacity }
+	, m_size{ vec.m_size }
+	, m_array{ new int m_capacity }
 {
 	copy(vec);
 }
 
 vector::vector(vector&& vec) noexcept
+	:vector()
 {
 	swap(*this, vec);
 }
@@ -109,7 +110,7 @@ void vector::resize(size_t new_size)
 		m_capacity = new_size * 2;
 		int* new_array = new int[m_capacity];
 
-		for (size_t i = 0; i < new_size; ++i)
+		for (size_t i = 0; i < m_size; ++i)
 		{
 			new_array[i] = m_array[i];
 		}
@@ -143,13 +144,11 @@ void vector::clear() noexcept
 
 void vector::insert(int index, int item)
 {
-	if (index > m_size)
-	{
-		index_check(index);
-	}
+	index_check(index);
+
 	if (m_size >= m_capacity)
 	{
-		resize(size + 1);
+		resize(m_size + 1);
 	}
 	
 	for (size_t i = m_size; i > index; --i)
