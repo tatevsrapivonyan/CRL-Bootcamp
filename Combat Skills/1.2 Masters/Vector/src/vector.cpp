@@ -135,12 +135,11 @@ void vector::pop_back()
 	--m_size;
 }
 
-void vector::clear()
+void vector::clear() noexcept
 {
 	delete[] m_array;
 	m_array = nullptr;
-	m_size = 0;
-	m_capacity = 0;
+	m_size = m_capacity = 0;
 }
 
 void vector::insert(int index, int item)

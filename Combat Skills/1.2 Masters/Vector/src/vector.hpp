@@ -28,7 +28,7 @@ public:
 	void insert(int, int);
 	void pop_back();
 	void erase(int);
-	void clear();
+	void clear() noexcept;
 	void resize(size_t);
 	void reserve(size_t);
 	void swap(vector&) noexcept;
