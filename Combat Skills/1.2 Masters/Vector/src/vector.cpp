@@ -121,6 +121,10 @@ void vector::resize(size_t new_size)
 	m_size = new_size;
 }
 
+void vector::reserve(size_t)
+{
+}
+
 void vector::push_back(int new_item)
 {
 	if (m_size >= m_capacity)
@@ -133,6 +137,10 @@ void vector::push_back(int new_item)
 void vector::pop_back()
 {
 	--m_size;
+}
+
+void vector::erase(int)
+{
 }
 
 void vector::clear() noexcept
