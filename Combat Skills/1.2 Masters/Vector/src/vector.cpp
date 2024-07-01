@@ -1,4 +1,5 @@
 #include "vector.hpp"
+#include <utility>
 
 vector::vector()
 	: m_capacity{ }
@@ -30,17 +31,18 @@ vector::vector(const std::initializer_list<int>& lst)
 vector::vector(const vector& vec)
 	: m_capacity{ vec.capacity() }
 	, m_size{ vec.size() }
-	, m_array{ new int[m_capacity] }
 {
+	delete[] m_array;
+	m_array{ new int[m_capacity] };
 	copy(vec);
 }
 
-vector::vector(vector&& vec) 
+vector::vector(vector&& vec) noexcept
 {
 	move(vec);
 }
 
-vector& vector::operator=(vector&& vec)
+vector& vector::operator=(vector&& vec) noexcept
 {
 	if (this != &vec)
 	{
@@ -51,16 +53,8 @@ vector& vector::operator=(vector&& vec)
 
 vector& vector::operator=(const vector& vec)
 {
-	if (this != &vec)
-	{
-		delete m_array;
-
-		m_capacity = vec.capacity();
-		m_size = vec.size();
-		m_array = new int[m_capacity];
-
-		copy(vec);
-	}
+	vector temp(vec);
+	swap(temp);
 	return *this;
 }
 
@@ -181,9 +175,18 @@ void vector::copy(const vector& vec)
 	}
 }
 
-void vector::move(vector&& vec)
+void vector::move(vector&& vec) noexcept
 {
+	m_capacity = std::exchange(vec.m_capacity, 0);
+	m_size = std::exchange(vec.m_size, 0);
+	m_array = std::exchange(vec.m_array, nullptr);
+}
 
+void vector::swap(vector& vec) noexcept
+{
+	std::swap(m_capacity, vec.m_capacity);
+	std::swap(m_size, vec.m_size);
+	std::swap(m_array, vec.m_array);
 }
 
 void vector::index_check(size_t index) const

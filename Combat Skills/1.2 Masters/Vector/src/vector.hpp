@@ -11,9 +11,9 @@ public:
 	vector(size_t);
 	vector(const std::initializer_list<int>&);
 	vector(const vector&);
-	vector(vector&&);
+	vector(vector&&) noexcept;
 	vector& operator=(const vector&);
-	vector& operator=(vector&&);
+	vector& operator=(vector&&) noexcept;
 	~vector();
 
 public:
@@ -31,10 +31,11 @@ public:
 	void clear();
 	void resize(size_t);
 	void reserve(size_t);
+	void swap(vector&) noexcept;
 
 private: 
 	void copy(const vector&);
-	void move(vector&&);
+	void move(vector&&) noexcept;
 	void index_check(size_t) const;
 
 private:
