@@ -31,23 +31,19 @@ vector::vector(const std::initializer_list<int>& lst)
 vector::vector(const vector& vec)
 	: m_capacity{ vec.capacity() }
 	, m_size{ vec.size() }
+	, m_array{ new int[m_capacity] };
 {
-	delete[] m_array;
-	m_array{ new int[m_capacity] };
 	copy(vec);
 }
 
 vector::vector(vector&& vec) noexcept
 {
-	move(vec);
+	swap(*this, vec);
 }
 
 vector& vector::operator=(vector&& vec) noexcept
 {
-	if (this != &vec)
-	{
-		mov(vec);
-	}
+	swap(*this, vec);
 	return *this;
 }
 
@@ -108,9 +104,8 @@ bool vector::is_empty() const
 
 void vector::resize(size_t new_size)
 {
-	if (new_size == m_capacity)
+	if (new_size > m_capacity)
 	{
-		m_size = new_size;
 		m_capacity = new_size * 2;
 		int* new_array = new int[m_capacity];
 
@@ -122,11 +117,15 @@ void vector::resize(size_t new_size)
 		delete[] m_array;
 		m_array = new_array;
 	}
+	m_size = new_size;
 }
 
 void vector::push_back(int new_item)
 {
-	resize(m_size);
+	if (m_size >= m_capacity)
+	{
+		resize(m_size);
+	}
 	m_array[m_size++] = new_item;
 }
 
@@ -146,24 +145,19 @@ void vector::insert(int index, int item)
 {
 	if (index > m_size)
 	{
-		size_t new_size = m_size;
-
-		while (new_size < index)
-		{
-			push_back(0);
-		}
-		push_back(item);
+		index_check(index);
 	}
-	else
+	if (m_size >= m_capacity)
 	{
-		size_t new_size = m_size + 1;
-		resize(new_size);
-		for (size_t i = m_size - 1; i > index; ++i)
-		{
-			m_array[i] = m_array[i - 1];
-		}
-		m_array[index] = item;
+		resize(size + 1);
 	}
+	
+	for (size_t i = m_size; i > index; --i)
+	{
+		m_array[i] = m_array[i - 1];
+	}
+	m_array[index] = item;
+	++m_size;
 }
 
 void vector::copy(const vector& vec)
@@ -194,4 +188,9 @@ void vector::index_check(size_t index) const
 	{
 		throw std::out_of_range("Index is out of range.");
 	}
+}
+
+void swap(vector& first, vector& secondd) noexcept
+{
+	first.swap(second);
 }
