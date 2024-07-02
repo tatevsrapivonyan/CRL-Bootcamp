@@ -1,6 +1,11 @@
 #include "vector.hpp"
 #include <utility>
 
+static void my_swap(vector& first, vector& second) noexcept
+{
+	first.swap(second);
+}
+
 vector::vector()
 	: m_capacity{ }
 	, m_size{ m_capacity }
@@ -31,7 +36,7 @@ vector::vector(const std::initializer_list<int>& lst)
 vector::vector(const vector& vec) 
 	: m_capacity{ vec.m_capacity }
 	, m_size{ vec.m_size }
-	, m_array{ new int m_capacity }
+	, m_array{ new int[m_capacity] }
 {
 	copy(vec);
 }
@@ -39,12 +44,12 @@ vector::vector(const vector& vec)
 vector::vector(vector&& vec) noexcept
 	:vector()
 {
-	swap(*this, vec);
+	my_swap(*this, vec);
 }
 
 vector& vector::operator=(vector&& vec) noexcept
 {
-	swap(*this, vec);
+	my_swap(*this, vec);
 	return *this;
 }
 
@@ -175,13 +180,6 @@ void vector::copy(const vector& vec)
 	}
 }
 
-void vector::move(vector&& vec) noexcept
-{
-	m_capacity = std::exchange(vec.m_capacity, 0);
-	m_size = std::exchange(vec.m_size, 0);
-	m_array = std::exchange(vec.m_array, nullptr);
-}
-
 void vector::swap(vector& vec) noexcept
 {
 	std::swap(m_capacity, vec.m_capacity);
@@ -195,9 +193,4 @@ void vector::index_check(size_t index) const
 	{
 		throw std::out_of_range("Index is out of range.");
 	}
-}
-
-void swap(vector& first, vector& secondd) noexcept
-{
-	first.swap(second);
 }
