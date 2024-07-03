@@ -25,9 +25,9 @@ public:
 	const size_t capacity() const;
 	bool is_empty() const;
 	void push_back(int);
-	void insert(int, int);
+	void insert(size_t, int);
 	void pop_back();
-	void erase(int);
+	void erase(size_t);
 	void clear() noexcept;
 	void resize(size_t);
 	void reserve(size_t);

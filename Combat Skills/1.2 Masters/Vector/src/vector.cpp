@@ -128,6 +128,7 @@ void vector::resize(size_t new_size)
 
 void vector::reserve(size_t)
 {
+	
 }
 
 void vector::push_back(int new_item)
@@ -144,8 +145,14 @@ void vector::pop_back()
 	--m_size;
 }
 
-void vector::erase(int)
+void vector::erase(size_t index)
 {
+	index_check(index);
+	for (size_t i = index; i < m_size - 1; ++i)	
+	{
+		m_array[i] = m_array[i + 1];
+	}
+	--m_size;
 }
 
 void vector::clear() noexcept
@@ -155,7 +162,7 @@ void vector::clear() noexcept
 	m_size = m_capacity = 0;
 }
 
-void vector::insert(int index, int item)
+void vector::insert(size_t index, int item)
 {
 	index_check(index);
 
