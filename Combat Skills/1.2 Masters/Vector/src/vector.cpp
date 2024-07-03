@@ -126,9 +126,12 @@ void vector::resize(size_t new_size)
 	m_size = new_size;
 }
 
-void vector::reserve(size_t)
+void vector::reserve(size_t new_capacity)
 {
-	
+	if (new_capacity > m_capacity)
+	{
+		m_capacity = new_capacity;
+	}
 }
 
 void vector::push_back(int new_item)
