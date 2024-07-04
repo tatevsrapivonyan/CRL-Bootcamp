@@ -136,9 +136,9 @@ void vector::reserve(size_t new_capacity)
 
 void vector::push_back(int new_item)
 {
-	if (m_size >= m_capacity)
+	if (m_size == m_capacity)
 	{
-		resize(m_size);
+		resize(m_size + 1);
 	}
 	m_array[m_size++] = new_item;
 }
