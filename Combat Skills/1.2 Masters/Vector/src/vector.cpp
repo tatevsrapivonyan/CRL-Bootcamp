@@ -108,22 +108,18 @@ bool vector::is_empty() const
 	return false;
 }
 
-void vector::resize(size_t new_size)
+void vector::resize(size_t new_capacity)
 {
-	if (new_size > m_capacity)
+	int* new_array = new int[m_capacity];
+
+	for (size_t i = 0; i < m_size; ++i)
 	{
-		m_capacity = new_size * 2;
-		int* new_array = new int[m_capacity];
-
-		for (size_t i = 0; i < m_size; ++i)
-		{
-			new_array[i] = m_array[i];
-		}
-
-		delete[] m_array;
-		m_array = new_array;
+		new_array[i] = m_array[i];
 	}
-	m_size = new_size;
+
+	delete[] m_array;
+	m_array = new_array;
+	m_capacity = new_capacity;
 }
 
 void vector::reserve(size_t new_capacity)
@@ -138,9 +134,19 @@ void vector::push_back(int new_item)
 {
 	if (m_size == m_capacity)
 	{
-		resize(m_size + 1);
+		size_t new_capacity{};
+		if (m_capacity == 0)
+		{
+			new_capacity = 1;
+		}
+		else
+		{
+			new_capacity = m_capacity * 2;
+		}
+		resize(new_capacity);
 	}
-	m_array[m_size++] = new_item;
+	m_array[m_size] = new_item;
+	++m_size;
 }
 
 void vector::pop_back()
