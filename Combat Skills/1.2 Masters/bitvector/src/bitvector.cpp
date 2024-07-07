@@ -12,8 +12,15 @@ bitvector::bitvector(size_t size)
 {
 }
 
-bitvector::bitvector(const bitvector&)
+bitvector::bitvector(const bitvector& bv)
 {
+	m_size = bv.m_size;
+	m_array = new int[m_size];
+
+	for (size_t i = 0; i < m_size; ++i)
+	{
+		m_array[i] = bv.m_array[i];
+	}
 }
 
 bitvector& bitvector::operator=(const bitvector&)
