@@ -23,18 +23,19 @@ bitvector::bitvector(const bitvector& bv)
 	}
 }
 
-bitvector& bitvector::operator=(const bitvector&)
+bitvector& bitvector::operator=(const bitvector& bv)
 {
-	// TODO: insert return statement here
+	bitvector temp;
+	swap(bv);
+	return *this;
 }
 
-bitvector::bitvector(bitvector&&) noexcept
+bitvector::bitvector(bitvector&& bv) noexcept
 {
 }
 
-bitvector& bitvector::operator=(bitvector&&) noexcept
+bitvector& bitvector::operator=(bitvector&& bv) noexcept
 {
-	// TODO: insert return statement here
 }
 
 bitvector::~bitvector()
@@ -43,11 +44,11 @@ bitvector::~bitvector()
 	m_array = nullptr;
 }
 
-void bitvector::set(size_t)
+void bitvector::set(size_t index)
 {
 }
 
-void bitvector::reset(size_t)
+void bitvector::reset(size_t index)
 {
 }
 
@@ -59,41 +60,40 @@ void bitvector::setall()
 {
 }
 
-void bitvector::toggle(size_t)
+void bitvector::toggle(size_t index)
 {
 }
 
-unsigned int bitvector::get_bit(size_t)
+unsigned int bitvector::get_bit(size_t index)
 {
-	return 0;
 }
 
-bool bitvector::is_set(size_t)
+bool bitvector::is_set(size_t index)
 {
-	return false;
 }
 
-bool bitvector::is_reset(size_t)
+bool bitvector::is_reset(size_t index)
 {
-	return false;
 }
 
 size_t bitvector::count_sets()
 {
-	return size_t();
 }
 
 size_t bitvector::count_resets()
 {
-	return size_t();
 }
 
 size_t bitvector::first_set()
 {
-	return size_t();
 }
 
 size_t bitvector::last_set()
 {
-	return size_t();
+}
+
+void bitvector::swap(bitvector& bv) noexcept
+{
+	std::swap(m_size, bv.m_size);
+	std::swap(m_array, bv.m_array);
 }

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <utility>
+
 class bitvector
 {
 public:
@@ -24,6 +26,9 @@ public:
 	size_t count_resets();
 	size_t first_set();
 	size_t last_set();
+
+private:
+	void swap(bitvector&) noexcept;
 
 private:
 	size_t m_size;
