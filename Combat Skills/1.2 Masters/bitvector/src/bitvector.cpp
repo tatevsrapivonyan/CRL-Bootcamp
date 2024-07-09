@@ -39,6 +39,8 @@ bitvector& bitvector::operator=(bitvector&&) noexcept
 
 bitvector::~bitvector()
 {
+	delete[] m_array;
+	m_array = nullptr;
 }
 
 void bitvector::set(size_t)
