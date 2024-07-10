@@ -1,6 +1,8 @@
-#pragma once
+#ifndef BITVECTOR_HPP
+#define BITVECTOR_HPP
 
 #include <utility>
+#include <stdexcept>
 
 class bitvector
 {
@@ -29,8 +31,11 @@ public:
 
 private:
 	void swap(bitvector&) noexcept;
+	void index_check(size_t);
 
 private:
 	size_t m_size;
 	unsigned int* m_array;
 };
+
+#endif //BITVECTOR_HPP
