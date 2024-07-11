@@ -1,5 +1,10 @@
 #include "bitvector.hpp"
 
+static void my_swap(bitvector& first, bitvector& second) noexcept
+{
+	first.swap(second);
+}
+
 bitvector::bitvector()
 	: m_size{ 0 }
 	, m_array{ nullptr }
@@ -8,7 +13,7 @@ bitvector::bitvector()
 
 bitvector::bitvector(size_t size)
 	: m_size{ size / sizeof(int) + (size % 32 == 0 ? 0 : 1) }
-	, m_array {new int[m_size]}
+	, m_array { new int[m_size] }
 {
 }
 
@@ -31,11 +36,15 @@ bitvector& bitvector::operator=(const bitvector& bv)
 }
 
 bitvector::bitvector(bitvector&& bv) noexcept
+	:vector()
 {
+	my_swap(*this, bv);
 }
 
 bitvector& bitvector::operator=(bitvector&& bv) noexcept
 {
+	my_swap(*this, bv);
+	return *this;
 }
 
 bitvector::~bitvector()
@@ -46,10 +55,16 @@ bitvector::~bitvector()
 
 void bitvector::set(size_t index)
 {
+	index_check(index);
+	int mask = 1 << (sizeof(int) - index % sizeof(int) - 1);
+	m_array[index / sizeof(int)] = m_array[index / sizeof(int)] | mask;
 }
 
 void bitvector::reset(size_t index)
 {
+	index_check(index);
+	int mask = 1 << (sizeof(int) - index % sizeof(int) - 1);
+	m_array[index / sizeof(int)] = m_array[index / sizeof(int)] & mask;
 }
 
 void bitvector::resetall()
@@ -96,4 +111,12 @@ void bitvector::swap(bitvector& bv) noexcept
 {
 	std::swap(m_size, bv.m_size);
 	std::swap(m_array, bv.m_array);
+}
+
+void bitvector::index_check(size_t index)
+{
+	if (index > m_size)
+	{
+		throw std::out_of_range("Index is out of range!");
+	}
 }
