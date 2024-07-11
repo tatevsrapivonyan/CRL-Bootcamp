@@ -28,9 +28,9 @@ public:
 	size_t count_resets();
 	size_t first_set();
 	size_t last_set();
+	void swap(bitvector&) noexcept;
 
 private:
-	void swap(bitvector&) noexcept;
 	void index_check(size_t);
 
 private:

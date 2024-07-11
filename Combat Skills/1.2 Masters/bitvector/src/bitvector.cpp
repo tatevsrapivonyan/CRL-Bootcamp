@@ -13,14 +13,14 @@ bitvector::bitvector()
 
 bitvector::bitvector(size_t size)
 	: m_size{ size / sizeof(int) + (size % 32 == 0 ? 0 : 1) }
-	, m_array { new int[m_size] }
+	, m_array { new unsigned int[m_size] }
 {
 }
 
 bitvector::bitvector(const bitvector& bv)
 {
 	m_size = bv.m_size;
-	m_array = new int[m_size];
+	m_array = new unsigned int[m_size];
 
 	for (size_t i = 0; i < m_size; ++i)
 	{
@@ -30,13 +30,13 @@ bitvector::bitvector(const bitvector& bv)
 
 bitvector& bitvector::operator=(const bitvector& bv)
 {
-	bitvector temp;
-	swap(bv);
+	bitvector temp(bv);
+	swap(temp);
 	return *this;
 }
 
 bitvector::bitvector(bitvector&& bv) noexcept
-	:vector()
+	:bitvector()
 {
 	my_swap(*this, bv);
 }
