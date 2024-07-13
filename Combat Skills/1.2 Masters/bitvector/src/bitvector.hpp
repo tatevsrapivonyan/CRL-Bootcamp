@@ -3,6 +3,7 @@
 
 #include <utility>
 #include <stdexcept>
+#include <iostream>
 
 class bitvector
 {
