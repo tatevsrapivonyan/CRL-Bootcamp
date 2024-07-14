@@ -77,6 +77,9 @@ void bitvector::setall()
 
 void bitvector::toggle(size_t index)
 {
+	index_check(index);
+	int mask = 1 << (sizeof(int) - index % sizeof(int) - 1);
+	m_array[index / sizeof(int)] = m_array[index / sizeof(int)] ^ mask;
 }
 
 unsigned int bitvector::get_bit(size_t index)
