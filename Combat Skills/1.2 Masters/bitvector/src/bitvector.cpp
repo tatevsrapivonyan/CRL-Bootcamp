@@ -69,10 +69,12 @@ void bitvector::reset(size_t index)
 
 void bitvector::resetall()
 {
+
 }
 
 void bitvector::setall()
 {
+
 }
 
 void bitvector::toggle(size_t index)
