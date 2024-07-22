@@ -25,3 +25,25 @@ int binary_search(const std::vector<int>& vec, int key)
 	}
 	return -1;
 }
+
+int bs_recursive(const std::vector<int> vec, int key, size_t low, size_t high)
+{
+	if (low < high)
+	{
+		size_t mid = low + (high - low) / 2;
+
+		if (vec[mid] == key)
+		{
+			return mid;
+		}
+		if (vec[mid] > key)
+		{
+			return bs_recursive(vec, key, low, mid);
+		}
+		if (vec[mid] < key)
+		{
+			return bs_recursive(vec, key, mid + 1, high);
+		}
+	}
+	return -1;
+}
