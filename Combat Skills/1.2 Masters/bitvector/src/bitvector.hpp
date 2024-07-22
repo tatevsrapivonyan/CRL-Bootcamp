@@ -1,9 +1,12 @@
 #ifndef BITVECTOR_HPP
 #define BITVECTOR_HPP
 
+#define BIT (sizeof(std::byte) * 8)
+
 #include <utility>
 #include <stdexcept>
 #include <iostream>
+#include <cstddef>
 
 class bitvector
 {
@@ -36,7 +39,7 @@ private:
 
 private:
 	size_t m_size;
-	unsigned int* m_array;
+	std::byte* m_array;
 };
 
 #endif //BITVECTOR_HPP

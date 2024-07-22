@@ -12,15 +12,15 @@ bitvector::bitvector()
 }
 
 bitvector::bitvector(size_t size)
-	: m_size{ size / sizeof(int) + (size % 32 == 0 ? 0 : 1) }
-	, m_array { new unsigned int[m_size] }
+	: m_size{ size / BIT + (size % BIT == 0 ? 0 : 1) }
+	, m_array { new std::byte[m_size] }
 {
 }
 
 bitvector::bitvector(const bitvector& bv)
 {
 	m_size = bv.m_size;
-	m_array = new unsigned int[m_size];
+	m_array = new std::byte[m_size];
 
 	for (size_t i = 0; i < m_size; ++i)
 	{
@@ -56,15 +56,15 @@ bitvector::~bitvector()
 void bitvector::set(size_t index)
 {
 	index_check(index);
-	int mask = 1 << (sizeof(int) - index % sizeof(int) - 1);
-	m_array[index / sizeof(int)] = m_array[index / sizeof(int)] | mask;
+	std::byte mask = std::byte(0b1) << (BIT - index % BIT- 1);
+	m_array[index / sizeof(std::byte)] = m_array[index / sizeof(std::byte)] | mask;
 }
 
 void bitvector::reset(size_t index)
 {
 	index_check(index);
-	int mask = 1 << (sizeof(int) - index % sizeof(int) - 1);
-	m_array[index / sizeof(int)] = m_array[index / sizeof(int)] & mask;
+	std::byte mask = std::byte(0b1) << (BIT - index % BIT- 1);
+	m_array[index / sizeof(std::byte)] = m_array[index / sizeof(std::byte)] & mask;
 }
 
 void bitvector::resetall()
@@ -80,8 +80,8 @@ void bitvector::setall()
 void bitvector::toggle(size_t index)
 {
 	index_check(index);
-	int mask = 1 << (sizeof(int) - index % sizeof(int) - 1);
-	m_array[index / sizeof(int)] = m_array[index / sizeof(int)] ^ mask;
+	std::byte mask = std::byte(0b1) << (BIT - index % BIT- 1);
+	m_array[index / sizeof(std::byte)] = m_array[index / sizeof(std::byte)] ^ mask;
 }
 
 unsigned int bitvector::get_bit(size_t index)
