@@ -13,7 +13,7 @@ void bubble_sort(std::vector<int>& vec)
 			if (vec[j] > vec[j + 1])
 			{
 				std::swap(vec[j], vec[j + 1]);
-				swapepd = true;
+				swapped = true;
 			}
 		}
 
